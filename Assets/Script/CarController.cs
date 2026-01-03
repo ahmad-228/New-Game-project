@@ -25,7 +25,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         rigidbody.centerOfMass = carCenterofmasstransform.localPosition;
     }
 
-    // Update is called once per frame
+    
    
 
     void FixedUpdate()
@@ -35,6 +35,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         GetInput();
         steering();
         applyBrakes();
+        PowerSteering();
     }
 
     void GetInput()
@@ -50,6 +51,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             backRightWheelCollider.brakeTorque = breakforce;
             frontLeftWheelCollider.brakeTorque = breakforce;
             backLeftWheelCollider.brakeTorque = breakforce;
+            rigidbody.linearDamping = 1f; 
         }
         else
         {
@@ -57,6 +59,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             backRightWheelCollider.brakeTorque = 0f;
             frontLeftWheelCollider.brakeTorque = 0f;
             backLeftWheelCollider.brakeTorque = 0f;
+            rigidbody.linearDamping = 0f;
         }
        
     }
@@ -69,6 +72,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         frontRightWheelCollider.steerAngle = steeringAngle * horizontalInput ;
         frontLeftWheelCollider.steerAngle = steeringAngle * horizontalInput ;
+    }
+    void PowerSteering()
+    {
+        if (horizontalInput == 0)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, 0f), Time.deltaTime);
+        }
     }
     void UpdateWheel()
     {
@@ -84,5 +94,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
         wheelCollider.GetWorldPose(out pos, out rot);
         transform.position = pos;
         transform.rotation = rot;
+    }
+    public float CarSpeed()
+    {
+       float speed = rigidbody.linearVelocity.magnitude * 2.23693629f;
+        return speed;
     }
 }
