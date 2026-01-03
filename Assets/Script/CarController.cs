@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class CarController : MonoBehaviour
 {
     public WheelCollider frontRightWheelCollider;
     public WheelCollider backRightWheelCollider;

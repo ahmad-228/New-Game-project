@@ -5,7 +5,7 @@ public class TrafficManager : MonoBehaviour
 {
     [SerializeField] Transform[] lane;
     [SerializeField] GameObject[] trafficVehicle;
-    [SerializeField] NewMonoBehaviourScript                                                           carController;
+    [SerializeField] CarController carController;
     void Start()
     {
         StartCoroutine(TrafficSpawner());
