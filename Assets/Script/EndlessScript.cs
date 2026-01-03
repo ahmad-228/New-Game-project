@@ -11,7 +11,7 @@ public class EndlessScript : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (playerCarTransform.position.z > transform.position.z+halfLength+10f)
